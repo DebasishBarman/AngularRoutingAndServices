@@ -1,0 +1,57 @@
+<app-navigate></app-navigate>
+<div class="container shadow rounded mt-4">
+  <div class="col-12">
+    <div class="container border">
+      <div class="row">
+        <div class="col-6 border">
+          <input type="text" class="form-control" name="search" [(ngModel)]="searchValue" (ngModelChange)="Search()"/>
+         
+        </div>
+        <div class="col-4 border">
+          <select class="form-select" required  aria-label="Default select example" name="mentor" (change)="onChange($event)" [(ngModel)]="delivered">
+            <option selected disabled>Select Your Mentor</option>
+            <option value="true">Delivered</option>
+            <option value="false">Not Delivered</option>
+          </select>
+        </div>
+       
+      </div>
+      
+    </div>
+    <table class="table table-responsive">
+      <!--  -->
+
+      <thead>
+        <tr>
+          <th scope="col">#Order_ID</th>
+
+          <th scope="col" (click)="sort('date')">Order Date &nbsp;<i class="bi bi-sort-alpha-up"></i></th>
+          <th scope="col">Delivered</th>
+          <th scope="col">Delivered Date</th>
+          <th scope="col">Total Price</th>
+          <th scope="col">Payment Method</th>
+          <th scope="col">Paid</th>
+          <th scope="col">Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- filter: false:'isDelivered' -->
+        <tr *ngFor="let order of orders | paginate:{itemsPerPage:5,currentPage:p} | orderBy: key:reverse">
+          <th scope="row">{{ order._id }}</th>
+          <td>{{ order.createdAt | date }}</td>
+          <td>{{ order.isDelivered }}</td>
+          <td>
+            {{
+              order.isDelivered ? (order.deliveredAt | date) : "Not Delivered"
+            }}
+          </td>
+          <td>{{ order.totalPrice }}</td>
+          <td>{{ order.paymentMethod }}</td>
+          <td>{{ order.isPaid }}</td>
+          <td><button class="btn btn-success">Details</button></td>
+        </tr>
+      </tbody>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </table>
+  </div>
+</div>

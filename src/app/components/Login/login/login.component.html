@@ -1,0 +1,51 @@
+
+<div class="container mt-4">
+    <div class="col-8">
+      <form #formName="ngForm" (ngSubmit)="formData(formName.value)">
+        <label  class="form-label">Login</label>
+        <div class="row border mb-3 p-2">
+          
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="mobile"
+              name="email"
+              #mobileValidation="ngModel"
+             
+              [class.is-invalid]="mobileValidation.invalid && mobileValidation.touched"
+              aria-describedby="emailHelp"
+              required
+              [(ngModel)]="email"
+            />
+           <small class="text-danger" [class.d-none]="mobileValidation.valid||mobileValidation.untouched">Email is required !</small>
+           <!-- <div *ngIf="mobileValidation.errors && (mobileValidation.invalid || mobileValidation.untouched)">
+           <small class="text-danger" *ngIf="mobileValidation.errors?.['required']">Phone Number is required!</small>
+           <small class="text-danger" *ngIf="mobileValidation.errors?.['pattern']">Must be 10 digits!</small> -->
+  
+  
+  
+           <!-- </div> -->
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              name="password"
+              [class.is-invalid]="passField.invalid&&passField.touched"
+              #passField="ngModel"
+              [(ngModel)]="password"
+              #usernameValidation="ngModel"
+              required
+            />
+            <small class="text-danger" [class.d-none]="passField.valid||passField.untouched">Password is required!</small>
+          </div>
+        </div> 
+        <button  [disabled]="formName.form.invalid" class="btn btn-primary mt-2 col-6">Submit</button>
+      </form>
+    </div>
+  </div>
+  

@@ -1,1 +1,106 @@
-<p>basic-form works!</p>
+<app-navigate></app-navigate>
+<div class="container mt-4">
+  <div class="col-8">
+    <form #formName="ngForm" (ngSubmit)="formData(formName.value)">
+      <label  class="form-label">Your Info</label>
+      <div class="row border mb-3 p-2">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            #emailClass="ngModel"
+        
+            [class.is-invalid]="emailClass.invalid && emailClass.touched"
+            aria-describedby="emailHelp"
+            required
+            [(ngModel)]="email"
+          />
+          <small class="text-danger" [class.d-none]="emailClass.valid || emailClass.untouched">Email Required</small>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            name="username"
+            [(ngModel)]="username"
+            #usernameValidation="ngModel"
+            required
+          />
+        </div>
+        {{usernameValidation.untouched}}
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Mobile Number</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="mobile"
+            name="mobile"
+            #mobileValidation="ngModel"
+            pattern="^\d{10}$"
+            [class.is-invalid]="mobileValidation.invalid && mobileValidation.touched"
+            aria-describedby="emailHelp"
+            required
+            [(ngModel)]="mobile"
+          />
+         <!-- <small class="text-danger" [class.d-none]="mobileValidation.valid||mobileValidation.untouched">Phone Number is required and must be 10 digits!</small> -->
+         <div *ngIf="mobileValidation.errors && (mobileValidation.invalid || mobileValidation.untouched)">
+         <small class="text-danger" *ngIf="mobileValidation.errors?.['required']">Phone Number is required!</small>
+         <small class="text-danger" *ngIf="mobileValidation.errors?.['pattern']">Must be 10 digits!</small>
+
+
+
+         </div>
+        </div>
+      </div>
+      
+      <label class="form-label">Choose your Team</label>
+      <div class="row border p-2 mb-3">
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1" name="frontend"  [(ngModel)]="frontend"/>
+          <label class="form-check-label" for="exampleCheck1">Front End</label>
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1"  name="backend"  [(ngModel)]="backend"/>
+          <label class="form-check-label" for="exampleCheck1">Backend</label>
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1" value="mobile" name="mobiledev" [(ngModel)]="mobiledev" />
+          <label class="form-check-label" for="exampleCheck1">Mobile Developer</label>
+        </div>
+      </div>
+      <label class="form-label">Select your Mentor</label>
+      <div class="row border p-2 mb-3">
+        <select class="form-select" required #mentorValidation="ngModel" [class.is-invalid]="mentorValidation.invalid&&mentorValidation.touched"  aria-label="Default select example" name="mentor" [(ngModel)]="mentor">
+          <option selected disabled>Select Your Mentor</option>
+          <option value="Ankit">Ankit Yadav</option>
+          <option value="CP">Chaturbhuj Prajapat</option>
+          <option value="Shivam">Shivam Mishra</option>
+        </select>
+        <small class="text-danger" [class.d-none]="mentorValidation.valid || mentorValidation.untouched">Select an option</small>
+      </div>
+      <label  class="form-label">Choose your Meeting Preference</label>
+      <div class="row border p-2 mb-3">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="preference" id="flexRadioDefault1" value="morning"  [(ngModel)]="preference">
+          <label class="form-check-label" for="flexRadioDefault1">
+           Morning (9 AM - 11 AM)
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="preference" id="flexRadioDefault2" value="evening" checked [(ngModel)]="preference">
+          <label class="form-check-label" for="flexRadioDefault2">
+           Evening (4 PM - 6 PM)
+          </label>
+        </div>
+      </div>
+      
+      <button [disabled]="formName.form.invalid" class="btn btn-primary mt-2 col-6">Submit</button>
+    </form>
+  </div>
+</div>
+<h3>{{formName.value | json}}</h3>

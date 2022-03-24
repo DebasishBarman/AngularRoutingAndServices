@@ -12,8 +12,8 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
             <p class="card-text">{{ empFName }} {{ empLName }}</p>
             <div>
               <p>
-                <button (click)="info()">Info</button>
-                <button (click)="contact()">Contact</button>
+                <button class="btn m-2 btn-success" (click)="info()">Info</button>
+                <button class="btn m-2 btn-warning" (click)="contact()">Contact</button>
               </p>
             </div>
             <router-outlet></router-outlet>

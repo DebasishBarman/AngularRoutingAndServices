@@ -1,0 +1,8 @@
+<nav>
+    <a *ngIf="_authService.loggedIn()"  routerLink="/employeeList" routerLinkActive="active">Employee List</a>
+    <a *ngIf="_authService.loggedIn()" routerLink="/employeeDetails" routerLinkActive="active">Employee Details</a>
+    <a *ngIf="_authService.loggedIn()" routerLink="/forms" routerLinkActive="active">Forms</a>
+    <a *ngIf="_authService.loggedIn()" routerLink="/tables" routerLinkActive="active">Tables</a>
+    <a *ngIf="_authService.loggedIn()" (click)="_authService.loggedOut()" routerLinkActive="active">Log Out</a>
+</nav>
+<router-outlet></router-outlet>
